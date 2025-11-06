@@ -13,15 +13,17 @@ public class StoneData
 public class StoneSpawn : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private string pattern = "Line"; // 불러올 패턴 이름
+    [SerializeField] private string pattern; // 불러올 패턴 이름
     [SerializeField] private GameObject stonePrefab;
+    private GameManager gameManager;
     private float yPos = 1f;
     private float zPos = 0f;         // 기본 z위치 (2D면 0, 3D면 조정)
 
     private void Start()
     {
         if(stonePrefab.tag !="White") yPos = -1f;
-
+        pattern = FindObjectOfType<GameManager>().getPattern();
+        if (pattern == null) pattern = "Zigzag";
         List<StoneData> stoneList = ReadCSV(pattern);
         SpawnStones(stoneList);
     }
