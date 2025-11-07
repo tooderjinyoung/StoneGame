@@ -5,13 +5,22 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameManager : Singleton<GameManager>
 {
-    private string currentPattern;
-    public void OnButtonClick(string pattern)
+
+    private Dictionary<string, GameObject> stonePrefabs = new Dictionary<string, GameObject>();
+    private Dictionary<string, string> arrangent = new Dictionary<string, string>();
+
+    private void DoAwake() 
     {
-        currentPattern = pattern;
+        stonePrefabs["White"] = Resources.Load<GameObject>("Assets/Prefeb/R_White.prefab");
+        stonePrefabs["Black"] = Resources.Load<GameObject>("Assets/Prefeb/R_Black.prefab");
     }
-    public string getPattern()
+
+    public void OnButtonClick(string pattern,string color)
     {
-        return this.currentPattern;
+        arrangent[color] = pattern;
+    }
+    public Dictionary<string,string> getPattern()
+    {
+        return this.arrangent;
     }
 }

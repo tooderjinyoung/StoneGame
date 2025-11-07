@@ -13,19 +13,40 @@ public class StoneData
 public class StoneSpawn : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private string pattern; // 불러올 패턴 이름
-    [SerializeField] private GameObject stonePrefab;
+
+    private Dictionary<string, string> pattern; // 불러올 패턴 이름
+
+    private Dictionary<string, GameObject> stonePrefab = new Dictionary<string, GameObject>();
     private GameManager gameManager;
     private float yPos = 1f;
     private float zPos = 0f;         // 기본 z위치 (2D면 0, 3D면 조정)
 
+    [SerializeField] private GameObject whiteStonePrefab;
+    [SerializeField] private GameObject blackStonePrefab;
+
+    string color_w = "White";
+    string color_b = "Black";
     private void Start()
     {
-        if(stonePrefab.tag !="White") yPos = -1f;
-        pattern = FindObjectOfType<GameManager>().getPattern();
-        if (pattern == null) pattern = "Zigzag";
-        List<StoneData> stoneList = ReadCSV(pattern);
-        SpawnStones(stoneList);
+        stonePrefab = new Dictionary<string, GameObject>
+        {
+            {"White", whiteStonePrefab},
+            {"Black", blackStonePrefab}
+        };
+
+        foreach (string kvp in stonePrefab.Keys)
+        {
+            if (kvp != color_w) yPos = -1f;
+            pattern = GameManager.Inst.getPattern();
+
+            if (pattern == null)
+            {
+                pattern[kvp] = "Line";
+            }
+            List<StoneData> stoneList = ReadCSV(pattern[kvp]);
+            SpawnStones(stoneList, kvp);
+
+        }
     }
 
     //  pattern별 CSV 데이터를 반환하는 함수
@@ -78,18 +99,18 @@ public class StoneSpawn : MonoBehaviour
     }
 
     //  리스트를 매개변수로 받아서 복제하는 함수
-    private void SpawnStones(List<StoneData> stoneList)
+    private void SpawnStones(List<StoneData> stoneList,string color)
     {
         if (stonePrefab == null)
         {
-            Debug.LogError("❌ Stone prefab not assigned in Inspector!");
             return;
         }
 
         foreach (StoneData stone in stoneList)
         {
             Vector3 position = new Vector3(stone.x, stone.y, zPos);
-            GameObject newStone = Instantiate(stonePrefab, position, Quaternion.identity);
+            Debug.Log(stonePrefab[color]);
+            GameObject newStone = Instantiate(stonePrefab[color], position, Quaternion.identity);
             newStone.name = $"{stone.pattern}_({stone.x},{stone.y})";
         }
 

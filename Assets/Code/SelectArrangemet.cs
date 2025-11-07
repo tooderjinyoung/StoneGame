@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class SelectArrangemet : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class SelectArrangemet : MonoBehaviour
     public void clickBtn()
     {
         GameObject clickObject =EventSystem.current.currentSelectedGameObject;
+        TextMeshProUGUI text = GameObject.Find("Arrangement").GetComponent<TextMeshProUGUI>();
 
         gameManager = FindObjectOfType<GameManager>();
         if (gameManager == null)
@@ -18,7 +21,8 @@ public class SelectArrangemet : MonoBehaviour
             Debug.LogError("GameManager component not found on the GameObject.");
             return;
         }
-        gameManager.OnButtonClick(clickObject.name);
+        gameManager.OnButtonClick(clickObject.name, text.text);
         Debug.Log(clickObject.name);
+        Debug.Log(text.text);
     }
 }
