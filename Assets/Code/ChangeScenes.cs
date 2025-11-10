@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class ChangeScenes : MonoBehaviour
 {
-    
-    private void Change()
+    private Dictionary<string, string> titleMap = new Dictionary<string, string>()
     {
-        SceneManager.LoadScene("PlaySenes");
+        { "StartSences", "BackGround" },
+        { "BackGround", "White" },
+        { "White", "Black" },
+        { "Black", "PlaySences" }
+    };
+
+    private void Change(string sceneName)
+    {
+        Debug.Log($"씬 전환: {sceneName}");
+        SceneManager.LoadScene(sceneName);
     }
 
     public void NextScene()
@@ -21,15 +28,26 @@ public class ChangeScenes : MonoBehaviour
             return;
         }
 
-        Dictionary<string, string> pattern = GameManager.Inst.getPattern();
-        if (pattern.Count == 2)
+        TextMeshProUGUI text = GameObject.Find("Arrangement").GetComponent<TextMeshProUGUI>();
+
+        string currentTitle = text.text;
+
+        if (titleMap.ContainsKey(currentTitle))
         {
-            Change();
+            // 다음 타이틀로 이동
+            string nextTitle = titleMap[currentTitle];
+
+            if (nextTitle.Contains("Sences"))
+            {
+                Change(nextTitle);
+                return;
+            }
+            text.text = nextTitle;
         }
         else
         {
-            TextMeshProUGUI text = GameObject.Find("Arrangement").GetComponent<TextMeshProUGUI>();
-            text.text = "Black";
+            Change(currentTitle);
+            return;
         }
     }
 }
