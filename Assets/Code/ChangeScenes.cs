@@ -29,6 +29,7 @@ public class ChangeScenes : MonoBehaviour
         }
 
         TextMeshProUGUI text = GameObject.Find("Arrangement").GetComponent<TextMeshProUGUI>();
+        Dictionary<string, string> pattern = GameManager.Inst.getPattern();
 
         string currentTitle = text.text;
 
@@ -36,7 +37,11 @@ public class ChangeScenes : MonoBehaviour
         {
             // 다음 타이틀로 이동
             string nextTitle = titleMap[currentTitle];
-
+            if (pattern[currentTitle] == null)
+            {
+                Debug.LogError("No pattern found");
+                return;
+            }
             if (nextTitle.Contains("Sences"))
             {
                 Change(nextTitle);

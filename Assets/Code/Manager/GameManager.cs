@@ -14,7 +14,6 @@ public class GameManager : Singleton<GameManager>
         stonePrefabs["White"] = Resources.Load<GameObject>("Assets/Prefeb/R_White.prefab");
         stonePrefabs["Black"] = Resources.Load<GameObject>("Assets/Prefeb/R_Black.prefab");
     }
-
     public void OnButtonClick(string pattern,string color)
     {
         arrangent[color] = pattern;
