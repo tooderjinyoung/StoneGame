@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
+using UnityEngine.SceneManagement   ;
+    
 public class ChangeScenes : MonoBehaviour
 {
     private Dictionary<string, string> titleMap = new Dictionary<string, string>()
     {
-        { "StartSences", "BackGround" },
         { "BackGround", "White" },
         { "White", "Black" },
         { "Black", "PlaySences" }
@@ -29,8 +28,7 @@ public class ChangeScenes : MonoBehaviour
         }
 
         TextMeshProUGUI text = GameObject.Find("Arrangement").GetComponent<TextMeshProUGUI>();
-        Dictionary<string, string> pattern = GameManager.Inst.getPattern();
-
+        Dictionary<string, string> pattern = GameManager.Inst.arrangent;
         string currentTitle = text.text;
 
         if (titleMap.ContainsKey(currentTitle))

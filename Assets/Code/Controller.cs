@@ -10,6 +10,9 @@ public class Controller : MonoBehaviour
     float maxPower = 10f;
     float mindistance = 5f;
     float maxdistance = 100f;
+
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();

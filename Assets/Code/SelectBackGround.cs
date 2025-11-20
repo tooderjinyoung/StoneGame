@@ -42,10 +42,11 @@ public class SelectBackGround : MonoBehaviour
             text.text = backGround.sprite.name;
         }
         GameManager.Inst.OnButtonClick(text.text);
+        Debug.Log("Selected Background: " + text.text);
         yield return new WaitForSeconds(3f);
         GameObject BackGroundArrangement = GameObject.Find("BackGroundArrangement");
         BackGroundArrangement.transform.localScale = new Vector3(0, 0, 0);
         GameObject StoneArrangement = GameObject.Find("StoneArrangement");
-        StoneArrangement.transform.localScale = new Vector3(1, 1, 1);
+        StoneArrangement.transform.localScale = new Vector3(1,1,1);
     }
 }

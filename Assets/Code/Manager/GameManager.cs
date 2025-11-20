@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class GameManager : Singleton<GameManager>
 {
 
-    private Dictionary<string, string> arrangent = new Dictionary<string, string>();
-    private string  selectBackground =null;
+    public Dictionary<string, string> arrangent { get; private set; } = new Dictionary<string, string>();
+    public string  selectBackground { get; private set; } = null;
+    public string my_color { get; private set; } = null;
 
     public void OnButtonClick(string pattern,string color)
     {
@@ -17,12 +18,8 @@ public class GameManager : Singleton<GameManager>
     {
         this.selectBackground = background;
     }
-    public Dictionary<string,string> getPattern()
+    public void OnButtonClick_color(string color)
     {
-        return this.arrangent;
-    }
-    public string getBackground()
-    {
-        return this.selectBackground;
+        this.my_color = color;
     }
 }
