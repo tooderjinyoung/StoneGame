@@ -1,0 +1,6 @@
+SeasonName,Count,Speed,Friction,Bounce
+Spring,5,1,0.95,0.7
+Summer,5,1.3,0.92,0.5
+Autumn,6,1.1,0.96,0.4
+Winter,5,1.5,0.99,0.2
+Normal,5,1,0.95,0.5

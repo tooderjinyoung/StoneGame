@@ -42,15 +42,15 @@ public class StoneSpawn : MonoBehaviour
 
         foreach (string kvp in stonePrefab.Keys)
         {
+             if (kvp == GameManager.Inst.my_color) yPos = -1f;
+             else if (kvp != GameManager.Inst.my_color) yPos = 1f;
 
-            if (kvp == GameManager.Inst.my_color) yPos = -1f;
-            else if (kvp != GameManager.Inst.my_color) yPos = 1f;
-            pattern = GameManager.Inst.arrangent;
-
-            if (pattern == null)
+            if (GameManager.Inst== null)
             {
                 pattern[kvp] = "Line";
             }
+            else { pattern = GameManager.Inst.arrangent; }
+
             List<StoneData> stoneList = ReadCSV(pattern[kvp]);
             SpawnStones(stoneList, kvp);
 

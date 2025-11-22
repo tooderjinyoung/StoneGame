@@ -195,6 +195,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerScale: 0.1
+  maxPower: 10
+  mindistance: 1
+  maxdistance: 80
+  stoneSpeed: 0
+  stoneFriction: 0
+  stoneBounce: 0
 --- !u!114 &-1046458325216638925
 MonoBehaviour:
   m_ObjectHideFlags: 0
