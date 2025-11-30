@@ -1,5 +1,6 @@
 ﻿using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Controller : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Controller : MonoBehaviour
 
     // 드래그 관련 설정값 (없으면 에러나서 다시 추가했습니다)
     [Header("Drag Settings")]
-    [SerializeField] float powerScale = 0.05f;
+    [SerializeField] float powerScale = 0.07f;
     [SerializeField] float maxPower = 10f;
     [SerializeField] float mindistance = 1f;
     [SerializeField] float maxdistance = 80f;
@@ -133,12 +134,13 @@ public class Controller : MonoBehaviour
             if (currentMoveTime > moveCheckDelay)
             {
                 // 이제 속도가 0에 가까우면 멈춘 것으로 간주
-                if (rb.velocity.sqrMagnitude < 0.05f)
+                if (rb.velocity.sqrMagnitude < 0.05f && StoneManager.Inst.IsAllStrop())
                 {
                     // 상태 초기화
                     this.isMove = false;
                     GameManager.Inst.isShot = false;
                     rb.velocity = Vector2.zero;
+                    rb.rotation = 0f;
 
                     // 턴 종료 보고
                     GameManager.Inst.CheckTurnEnd();
@@ -152,10 +154,10 @@ public class Controller : MonoBehaviour
     {
         if (collision.gameObject.tag == "Dead")
         {
-
+            GameManager.Inst.CheckTurnEnd();
             isMove = false;
             GameManager.Inst.isShot = false;
-            GameManager.Inst.CheckTurnEnd();
+            rb.rotation = 0f;
             Destroy(gameObject);
         }
     }

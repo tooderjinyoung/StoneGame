@@ -32,6 +32,7 @@ public class GameManager : Singleton<GameManager>
 
     public void  CheckTurnEnd()
     {
+        
         if(currentState == GameState.BLACK_TURN)
             changeState(GameState.WHITE_TURN);
         else if(currentState == GameState.WHITE_TURN)
@@ -149,9 +150,6 @@ public class GameManager : Singleton<GameManager>
                         changeState(GameState.WHITE_TURN);
                     else
                         changeState(GameState.BLACK_TURN);
-                break;
-            case GameState.GAMEOVER:
-
                 break;
         }
     }

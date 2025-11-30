@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public class StoneData
@@ -29,6 +31,9 @@ public class StoneSpawn : MonoBehaviour
     string color_b = "Black";
     private void Start()
     {
+
+
+
         stonePrefab = new Dictionary<string, GameObject>
         {
             {color_w, whiteStonePrefab},
@@ -39,7 +44,6 @@ public class StoneSpawn : MonoBehaviour
             {color_w, whiteParent},
             {color_b, blackParent}
         };
-
         foreach (string kvp in stonePrefab.Keys)
         {
              if (kvp == GameManager.Inst.my_color) yPos = -1f;
@@ -52,9 +56,10 @@ public class StoneSpawn : MonoBehaviour
             else { pattern = GameManager.Inst.arrangent; }
 
             List<StoneData> stoneList = ReadCSV(pattern[kvp]);
-            SpawnStones(stoneList, kvp);
+            SpawnStones(stoneList, kvp,yPos);
 
         }
+
     }
 
     //  pattern별 CSV 데이터를 반환하는 함수
@@ -101,13 +106,18 @@ public class StoneSpawn : MonoBehaviour
                 }
             }
         }
+        if (GameManager.Inst.selectBackground.Equals("Autumn")) stoneList.Add(new StoneData {
+            pattern = "Bounus"
+            , x = 0,
+            y = 0.75f * yPos});
+
 
         Debug.Log($"Loaded {stoneList.Count} stones for pattern: {pattern}");
         return stoneList;
     }
 
     //  리스트를 매개변수로 받아서 복제하는 함수
-    private void SpawnStones(List<StoneData> stoneList,string color)
+    private void SpawnStones(List<StoneData> stoneList,string color,float yPos)
     {
         if (stonePrefab == null)
         {
@@ -121,7 +131,6 @@ public class StoneSpawn : MonoBehaviour
             GameObject newStone = Instantiate(stonePrefab[color], position, Quaternion.identity, parentDict[color]);
             newStone.name = $"{stone.pattern}_({stone.x},{stone.y})";
         }
-
         Debug.Log($" Spawned {stoneList.Count} stones successfully!");
     }
 }
