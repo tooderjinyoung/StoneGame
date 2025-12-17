@@ -8,14 +8,14 @@ public class ChangeScenes : MonoBehaviour
 {
     private Dictionary<string, string> titleMap = new Dictionary<string, string>()
     {
+        {"Start","SettingSenes" },
         { "BackGround", "White" },
         { "White", "Black" },
-        { "Black", "PlaySences" }
+        { "Black", "LoadSences" }
     };
 
     private void Change(string sceneName)
     {
-        Debug.Log($"씬 전환: {sceneName}");
         SceneManager.LoadScene(sceneName);
     }
 
@@ -35,6 +35,7 @@ public class ChangeScenes : MonoBehaviour
         {
             // 다음 타이틀로 이동
             string nextTitle = titleMap[currentTitle];
+
             if (pattern[currentTitle] == null)
             {
                 Debug.LogError("No pattern found");
@@ -49,7 +50,7 @@ public class ChangeScenes : MonoBehaviour
         }
         else
         {
-            Change(currentTitle);
+            Change(titleMap[currentTitle]);
             return;
         }
     }

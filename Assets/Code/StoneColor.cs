@@ -13,7 +13,6 @@ public class StoneColor : MonoBehaviour
         string clickedName = EventSystem.current.currentSelectedGameObject.name;
         GameManager.Inst.OnButtonClick_color(clickedName);
 
-        Debug.Log(clickedName);
         GameObject StoneArrangement = GameObject.Find("StoneSelect");
 
         StoneArrangement.transform.localScale = new Vector3(0, 0, 0);

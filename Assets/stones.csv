@@ -9,11 +9,11 @@ Zigzag,-1,1.75
 Zigzag,0,2.75
 Zigzag,1,1.75
 Zigzag,2,2.75
-Repeat,-2,2.75
-Repeat,-1,1.75
+Repeat,-2,1.75
+Repeat,-1,2.25
 Repeat,0,2.75
-Repeat,1,1.75
-Repeat,2,2.75
+Repeat,1,2.25
+Repeat,2,1.75
 ReverseZigzag,-2,1.75
 ReverseZigzag,-1,2.75
 ReverseZigzag,0,1.75

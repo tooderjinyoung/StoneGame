@@ -50,3 +50,6 @@ TagManager:
   - name: Stone
     uniqueID: 2196451053
     locked: 0
+  - name: GuideLine
+    uniqueID: 1715144347
+    locked: 0

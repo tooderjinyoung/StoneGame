@@ -22,7 +22,5 @@ public class SelectArrangemet : MonoBehaviour
             return;
         }
         gameManager.OnButtonClick(clickObject.name, text.text);
-        Debug.Log(clickObject.name);
-        Debug.Log(text.text);
     }
 }

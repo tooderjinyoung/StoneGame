@@ -6,13 +6,13 @@ using UnityEngine.UI;
 // 해상도 관리자. 
 // 플레이하는 디바이스의 해상도와 제작할때 기준이 된 해상도가 서로 다를때,
 // 레터박스와 세터박스의 기법을 활용해서 제작한 비율이 유지가 되도록. 
-public class ResolutionManager : Singleton<ResolutionManager>
+public class ResolutionManager :SingletonDestroy<ResolutionManager>
 {
     [SerializeField] private Camera mainCam;
     [SerializeField] private Canvas canvas;
     [SerializeField] private CanvasScaler canvasScalier;
 
-    private Vector2 fixedAspectRatio = new Vector2(16,16);
+    private Vector2 fixedAspectRatio = new Vector2(16,9);
 
     protected override void DoAwake()
     {
@@ -92,7 +92,7 @@ public class ResolutionManager : Singleton<ResolutionManager>
         canvas.planeDistance = 1f;
 
         canvasScalier.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        canvasScalier.referenceResolution = new Vector2(1920, 1920);
+        canvasScalier.referenceResolution = new Vector2(1920, 1080);
         canvasScalier.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
         canvasScalier.matchWidthOrHeight = 0.5f;
     }

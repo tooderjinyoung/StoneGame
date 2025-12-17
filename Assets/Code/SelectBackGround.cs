@@ -11,7 +11,12 @@ public class SelectBackGround : MonoBehaviour
     Sprite[] backGroundObject = new Sprite[5];
     private Image backGround;
     TextMeshProUGUI text;
+
+#if UNITY_EDITOR
+    public float timer = 0f;
+#else
     public float timer = 5f;
+#endif
     private float speed = 0.1f;
 
 
